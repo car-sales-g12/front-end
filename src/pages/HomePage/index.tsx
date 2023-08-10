@@ -1,3 +1,5 @@
+
+import CarList from "../../components/CarList"
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { StyledMain } from "./style"
@@ -8,8 +10,7 @@ export const HomePage = () => {
         <div>
             <Header/>
                 <StyledMain>
-                    <section className='welcomeBox'>
-                    </section>
+                    <CarList/>
                 </StyledMain>
             <Footer/>
         </div>
