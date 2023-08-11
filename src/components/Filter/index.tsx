@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 export interface FilterOptions {
-  marca: string;
-  modelo: string;
-  cor: string;
-  ano: number;
-  combustivel: string;
+  brand: string;
+  model: string;
+  color: string;
+  year: string;
+  fuel: string;
   km: [number, number];
-  preco: [number, number];
+  value: [number, number];
 }
 
 interface CarFilterProps {
@@ -15,8 +15,7 @@ interface CarFilterProps {
 }
 
 const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
-  
-  const marcas = [
+  const brand = [
     'general Motors',
     'Fiat',
     'Ford',
@@ -25,7 +24,7 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
     'Volswagen',
   ];
 
-  const modelos = [
+  const model = [
     'Civic',
     'Corolla',
     'Cruze',
@@ -36,40 +35,27 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
     'Porsche 718',
   ];
 
-  const cores = ['Azul', 'Branca', 'Cinza', 'Prata', 'Preto', 'Verde'];
+  const color = ['Blue', 'White', 'Gray', 'Silver', 'Black', 'Green'];
 
-  const anos = [2022, 2021, 2018, 2015, 2013, 2012, 2010];
+  const year = [2022, 2021, 2018, 2015, 2013, 2012, 2010];
 
-  const combustiveis = ['Elétrico', 'Flex', 'Híbrido'];
+  const fuel = ['Elétrico', 'Flex', 'Híbrido'];
 
-  const [selectedMarca, setSelectedMarca] = useState('');
-  const [selectedModelo, setSelectedModelo] = useState('');
-  const [selectedCor, setSelectedCor] = useState('');
-  const [selectedAno, setSelectedAno] = useState(0);
-  const [selectedCombustivel, setSelectedCombustivel] = useState('');
-  const [selectedKm, setSelectedKm] = useState<[number, number]>([0, 650000]);
-  const [selectedPreco, setSelectedPreco] = useState<[number, number]>([10000, 550000]);
+  const [selectedMarca, setSelectedMarca] = useState<string>('');
+  const [selectedModelo, setSelectedModelo] = useState<string>('');
+  const [selectedCor, setSelectedCor] = useState<string>('');
+  const [selectedAno, setSelectedAno] = useState<string>('');
+  const [selectedCombustivel, setSelectedCombustivel] = useState<string>('');
+  const [selectedKm, setSelectedKm] = useState<[number, number]>([0, 700000]);
+  const [selectedPreco, setSelectedPreco] = useState<[number, number]>([0, 1000000]);
 
-  const applyFilter = () => {
-    const filters: FilterOptions = {
-      marca: selectedMarca,
-      modelo: selectedModelo,
-      cor: selectedCor,
-      ano: selectedAno,
-      combustivel: selectedCombustivel,
-      km: selectedKm,
-      preco: selectedPreco,
-    };
-
-    
-
-    onApplyFilter(filters);
+  const handleOptionClick = (
+    currentValue: string,
+    setValue: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    setValue(currentValue === '' ? '' : currentValue);
+    console.log(`Valor selecionado: ${currentValue}`);
   };
-
-  const toggleOption = (currentValue: string, setValue: React.Dispatch<React.SetStateAction<string>>) => {
-    setValue(currentValue === '' ? currentValue : '');
-  };
-
   const handleRangeChange = (
     value: [number, number],
     setValue: React.Dispatch<React.SetStateAction<[number, number]>>
@@ -77,72 +63,85 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
     setValue(value);
   };
 
+  const applyFilter = () => {
+    const filters: FilterOptions = {
+      brand: selectedMarca,
+      model: selectedModelo,
+      color: selectedCor,
+      year: selectedAno,
+      fuel: selectedCombustivel,
+      km: selectedKm,
+      value: selectedPreco,
+    };
+
+    onApplyFilter(filters);
+  };
+
   return (
     <div>
       <div>
         <label>Marca:</label>
-        {marcas.map((marca) => (
-          <div
-            key={marca}
-            className={selectedMarca === marca ? 'option selected' : 'option'}
-            onClick={() => toggleOption(selectedMarca, setSelectedMarca)}
+        {brand.map((brands) => (
+          <button
+            key={brands}
+            className={selectedMarca === brands ? 'option selected' : 'option'}
+            onClick={() => handleOptionClick(brands, setSelectedMarca)}
           >
-            {marca}
-          </div>
+            {brands}
+          </button>
         ))}
       </div>
       <div>
         <label>Modelo:</label>
-        {modelos.map((modelo) => (
-          <div
-            key={modelo}
-            className={selectedModelo === modelo ? 'option selected' : 'option'}
-            onClick={() => toggleOption(selectedModelo, setSelectedModelo)}
+        {model.map((models) => (
+          <button
+            key={models}
+            className={selectedModelo === models ? 'option selected' : 'option'}
+            onClick={() => handleOptionClick(models, setSelectedModelo)}
           >
-            {modelo}
-          </div>
+            {models}
+          </button>
         ))}
       </div>
       <div>
         <label>Cor:</label>
-        {cores.map((cor) => (
-          <div
-            key={cor}
-            className={selectedCor.toLowerCase() === cor.toLowerCase() ? 'option selected' : 'option'}
-            onClick={() => setSelectedCor(selectedCor.toLowerCase() === cor.toLowerCase() ? '' : cor)}
+        {color.map((colors) => (
+          <button
+            key={colors}
+            className={selectedCor.toLowerCase() === colors.toLowerCase() ? 'option selected' : 'option'}
+            onClick={() => handleOptionClick(colors, setSelectedCor)}
           >
-            {cor}
-          </div>
+            {colors}
+          </button>
         ))}
       </div>
       <div>
         <label>Ano:</label>
-        <div
-          className={selectedAno === 0 ? 'option selected' : 'option'}
-          onClick={() => setSelectedAno(0)}
+        <button
+          className={selectedAno === '' ? 'option selected' : 'option'}
+          onClick={() => handleOptionClick('', setSelectedAno)}
         >
-          Qualquer
-        </div>
-        {anos.map((ano) => (
-          <div
-            key={ano}
-            className={selectedAno === ano ? 'option selected' : 'option'}
-            onClick={() => setSelectedAno(selectedAno === ano ? 0 : ano)}
+        </button>
+        {year.map((years) => (
+          <button
+            key={years}
+            className={selectedAno === years.toString() ? 'option selected' : 'option'}
+            onClick={() => handleOptionClick(selectedAno === years.toString() ? '' : years.toString(), setSelectedAno)}
           >
-            {ano}
-          </div>
+            {years}
+          </button>
         ))}
       </div>
       <div>
         <label>Combustível:</label>
-        {combustiveis.map((combustivel) => (
-          <div
-            key={combustivel}
-            className={selectedCombustivel.toLowerCase() === combustivel.toLowerCase() ? 'option selected' : 'option'}
-            onClick={() => setSelectedCombustivel(selectedCombustivel.toLowerCase() === combustivel.toLowerCase() ? '' : combustivel)}
+        {fuel.map((fuels) => (
+          <button
+            key={fuels}
+            className={selectedCombustivel.toLowerCase() === fuels.toLowerCase() ? 'option selected' : 'option'}
+            onClick={() => handleOptionClick(fuels, setSelectedCombustivel)}
           >
-            {combustivel}
-          </div>
+            {fuels}
+          </button>
         ))}
       </div>
       <div>
@@ -150,14 +149,14 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
         <input
           type="range"
           min={0}
-          max={650000}
+          max={700000}
           value={selectedKm[0]}
           onChange={(e) => handleRangeChange([Number(e.target.value), selectedKm[1]], setSelectedKm)}
         />
         <input
           type="range"
           min={0}
-          max={650000}
+          max={700000}
           value={selectedKm[1]}
           onChange={(e) => handleRangeChange([selectedKm[0], Number(e.target.value)], setSelectedKm)}
         />
@@ -167,15 +166,15 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
         <label>Preço:</label>
         <input
           type="range"
-          min={10000}
-          max={550000}
+          min={0}
+          max={1000000}
           value={selectedPreco[0]}
           onChange={(e) => handleRangeChange([Number(e.target.value), selectedPreco[1]], setSelectedPreco)}
         />
         <input
           type="range"
-          min={10000}
-          max={550000}
+          min={0}
+          max={1000000}
           value={selectedPreco[1]}
           onChange={(e) => handleRangeChange([selectedPreco[0], Number(e.target.value)], setSelectedPreco)}
         />
