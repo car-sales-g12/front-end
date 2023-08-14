@@ -1,15 +1,12 @@
-import { HomePage } from "./pages/HomePage"
+import { RoutesMain } from "./routes"
 import GlobalStyle from "./style/GlobalStyle"
-
-
 
 export const App = () => {
   return (
     <>
-      <GlobalStyle/>
-      <HomePage/>
+      <GlobalStyle />
+      <RoutesMain />
     </>
   )
-}
 
-export default App
+}

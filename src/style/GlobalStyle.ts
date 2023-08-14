@@ -6,6 +6,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
+
 :root {
     --color-brand-1: #4529E6;
     --color-brand-2: #5126EA;
