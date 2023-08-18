@@ -45,6 +45,6 @@ export default createGlobalStyle`
     --color-random-9: #153D2E;
     --color-random-10: #6100FF;
     --color-random-11: #5700E3;
-    --color-random-12: #30007D;
+    --color-random-12: #9747FF;
 }
 `;

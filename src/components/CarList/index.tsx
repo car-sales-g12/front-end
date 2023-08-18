@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CarFilter, { FilterOptions } from '../Filter';
 import { api } from '../../services/api';
+import { BrandAndModelName, CarCard, CarDescription, CarImage, CarListContainer, Container, FilterContainer, KmYearElement, KmYearPriceContainer, PriceElement } from './style';
 
 interface Car {
   id: number;
@@ -19,6 +20,8 @@ interface Car {
 const CarList: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  
+
 
   useEffect(() => {
   
@@ -46,29 +49,31 @@ const CarList: React.FC = () => {
 
       return brandMatch && modelMatch && colorMatch && yearMatch && fuelMatch && kmMatch && priceMatch;
     });
-
     setFilteredCars(filtered);
     console.log(filtered)
   };
 
   return (
-    <div>
+    <Container>
+      <FilterContainer>
       <CarFilter onApplyFilter={applyFilter} />
-      <div>
+      </FilterContainer>  
+      <CarListContainer>
         {filteredCars.map((car: Car) => (
-          <div key={car.id} style={{ border: '1px solid #ccc', padding: '16px', margin: '16px' }}>
-            <img src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
-            <h3>Marca: {car.brand}</h3>
-            <h3>Modelo: {car.model}</h3>
-            <p>Descrição: {car.description}</p>
-            <p>Quilometragem: {car.km} km</p>
+          <CarCard key={car.id}>
+            <CarImage src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
+            <BrandAndModelName>{car.brand} - {car.model}</BrandAndModelName>
+            <CarDescription>{car.description}</CarDescription>
             <p>Cor: {car.color} </p>
-            <p>Ano: {car.year}</p>
-            <p>Valor: R${car.value}</p>
-          </div>
+            <KmYearPriceContainer>
+            <KmYearElement>{car.km} km</KmYearElement>
+            <KmYearElement>{car.year}</KmYearElement>
+            <PriceElement>R${car.value}</PriceElement>
+            </KmYearPriceContainer>
+          </CarCard>
         ))}
-      </div>
-    </div>
+      </CarListContainer>
+    </Container>
   );
 };
 
