@@ -60,16 +60,16 @@ export const FormLogin: React.FC<FormLoginProps> = ({ onLoginSuccess }) => {
       const { token } = response.data;
       localStorage.setItem("Token", token);
 
-      if (response.data.is_seller) {
+      if (response.data) {
         const isSeller = response.data.is_seller;
         onLoginSuccess(isSeller);
-
+        console.log(isSeller)
         if (isSeller) {
           toast.success("Login realizado com sucesso como vendedor");
           setTimeout(() => navigate("/seller-dashboard"), 3100);
         } else {
           toast.success("Login realizado com sucesso");
-          setTimeout(() => navigate("/erro"), 3100);
+          setTimeout(() => navigate("/"), 3100);
         }
       } else {
         toast.error("Token inválido ou informações ausentes");
