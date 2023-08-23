@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
   return (
     <>
       <Header />
-      <SytlesMainLogin>
+      <SytlesMainLogin className="h-screen flex items-center justify-center bg-grey-scale-grey-8">
         <section>
           <h1>Login</h1>
           <FormLogin onLoginSuccess={handleLoginSuccess} />
