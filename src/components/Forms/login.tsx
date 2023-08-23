@@ -62,7 +62,7 @@ export const FormLogin: React.FC<FormLoginProps> = ({ onLoginSuccess }) => {
       if (response.data) {
         const isSeller = response.data.is_seller;
         onLoginSuccess(isSeller);
-        console.log(isSeller)
+        console.log(isSeller);
         if (isSeller) {
           toast.success("Login realizado com sucesso como vendedor");
           setTimeout(() => navigate("/seller-dashboard"), 3100);
@@ -105,7 +105,13 @@ export const FormLogin: React.FC<FormLoginProps> = ({ onLoginSuccess }) => {
 
       <h2>Esqueci minha senha</h2>
 
-      <button type="submit">Entrar</button>
+      <button
+        className="hover:bg-brand-brand-1
+             hover:bg-opacity-90"
+        type="submit"
+      >
+        Entrar
+      </button>
       <ToastContainer
         position="top-right"
         autoClose={2300}

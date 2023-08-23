@@ -12,7 +12,7 @@ export const Input = forwardRef(
       <div>
         <label>
           {label}
-          <input type="text" ref={ref} {...rest} />
+          <input className='focus:outline-brand-brand-1' type="text" ref={ref} {...rest} />
           {error?.message}
         </label>
       </div>
