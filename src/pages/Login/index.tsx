@@ -3,8 +3,16 @@ import { FormLogin } from "../../components/Forms/login"
 import { Header } from "../../components/Header"
 import { SytlesMainLogin } from "./styles"
 
-export const Login = () => {
-    const navigate = useNavigate()
+export const Login: React.FC = () => {
+    const navigate = useNavigate();
+
+    const handleLoginSuccess = (isSeller: boolean) => {
+        if (isSeller) {
+            navigate('/seller-dashboard');
+        } else {
+            navigate('/');
+        }
+    };
     return (
         <>
             <Header />
@@ -12,7 +20,7 @@ export const Login = () => {
 
                 <section>
                     <h1>Login</h1>
-                    <FormLogin />
+                    <FormLogin onLoginSuccess={handleLoginSuccess} />
                     <h3>ainda não possui conta?</h3>
                     <button onClick={() => navigate('/register')}>Cadastrar</button>
                 </section>
