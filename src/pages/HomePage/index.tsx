@@ -9,7 +9,7 @@ export const HomePage = () => {
         <>
         <div>
             <Header/>
-                <StyledMain>
+                <StyledMain className="mt-[5rem]">
                     <CarList/>
                 </StyledMain>
             <Footer/>
