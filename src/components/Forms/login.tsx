@@ -6,7 +6,6 @@ import { formLoginSchema } from "../../schemas/login.schema";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
 interface FormErrors {
   email?: string;
