@@ -6,13 +6,18 @@ import { formLoginSchema } from "../../schemas/login.schema"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 interface FormErrors {
     email?: string;
     password?: string;
 }
 
-export const FormLogin = () => {
+interface FormLoginProps {
+    onLoginSuccess: (isSeller: boolean) => void;
+}
+
+export const FormLogin: React.FC<FormLoginProps> = ({ onLoginSuccess }) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
@@ -41,18 +46,33 @@ export const FormLogin = () => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
+    
         try {
             formLoginSchema.parse(formData);
+            console.log("Formulário válido");
             const transformedData = transformEmptyToNull(formData);
-            const response = await api.post('/login', transformedData)
-            const { token } = response.data
-            localStorage.setItem("Token", token)
-
-            toast.success('Login realizado com sucesso')
-            setTimeout(() => navigate('/'), 3100)
+            const response = await api.post('/login', transformedData);
+            const { token } = response.data;
+            localStorage.setItem("Token", token);
+    
+            const decodedToken: any = jwt_decode(token);
+            if (decodedToken?.is_seller) {
+                const isSeller = decodedToken.is_seller;
+                onLoginSuccess(isSeller);
+    
+                if (isSeller) {
+                    toast.success('Login realizado com sucesso como vendedor');
+                    setTimeout(() => navigate('/seller-dashboard'), 3100);
+                } else {
+                    toast.success('Login realizado com sucesso');
+                    setTimeout(() => navigate('/erro'), 3100);
+                }
+            } else {
+                toast.error('Token inválido ou informações ausentes');
+            }
         } catch (error: any) {
             setFormErrors(error.formErrors?.fieldErrors || {});
-            toast.error('Falha ao realizar o login, revise os dados e tente novamente')
+            toast.error('Falha ao realizar o login, revise os dados e tente novamente');
         }
     };
 
