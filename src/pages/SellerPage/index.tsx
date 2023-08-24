@@ -19,6 +19,7 @@ interface Announcement {
   year: string;
   fuel: string;
   km: string;
+  active: boolean;
   color: string;
   good_deal: boolean;
   value: string;
@@ -74,10 +75,13 @@ export const SellerDashboard: React.FC = () => {
             <div className="flex items-center justify-center bg-brand-brand-1 relative h-48">
               <div className=" bg-white w-[80%] absolute bottom-[-12rem] h-[350px] shadow rounded px-4 py-8  flex flex-col">
                 <div className="h-[50%]">
-                  <img
-                    src={sellerInfo.perfilImg}
-                    className="w-[104px] h-[104px] rounded-full object-cover"
-                  />
+                  <div className="relative">
+                    <img
+                      src={sellerInfo.perfilImg}
+                      className="w-[104px] h-[104px] rounded-full object-cover"
+                    />
+                    <span></span>
+                  </div>
                   <div className="flex gap-3 mt-3">
                     <h3 className="font-bold">{sellerInfo.name}</h3>
                     <span className="bg-brand-brand-4 text-brand-brand-2 px-2 py-1 rounded font-bold text-xs self-center">
@@ -107,12 +111,17 @@ export const SellerDashboard: React.FC = () => {
                   key={announcement.id}
                   className="w-[312px] h-[356px] flex flex-col"
                 >
-                  <div className="h-[40%] w-full">
+                  <div className="h-[40%] w-full relative">
                     <img
                       className="h-full object-cover w-full bg-grey-scale-grey-7"
                       src={announcement.cover_img}
                       alt="foto do carro"
                     />
+                    {announcement.active ? (
+                      <span className="absolute top-3 left-3 px-2 bg-brand-brand-1 text-white rounded">Ativo</span>
+                    ) : (
+                      <span className="absolute top-3 left-3 px-2 bg-grey-scale-grey-4 text-white rounded">Inativo</span>
+                    )}
                   </div>
                   <div className="h-[60%] flex flex-col justify-around">
                     <h2 className="font-bold">{`${announcement.brand} - ${announcement.model}`}</h2>
@@ -145,7 +154,7 @@ export const SellerDashboard: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
