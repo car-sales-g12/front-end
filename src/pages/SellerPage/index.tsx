@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import jwt_decode from "jwt-decode";
-import { Header } from "../../components/Header";
 import { HeaderSeller } from "../../components/Header copy";
 
 interface SellerInfo {
