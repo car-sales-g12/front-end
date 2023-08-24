@@ -57,7 +57,16 @@ export const SellerDashboard: React.FC = () => {
 
   return (
     <>
-      <HeaderSeller />
+      <HeaderSeller>
+        <div className="flex gap-5 items-center">
+          <img
+            className="w-[60px] h-[60px] rounded-full object-cover"
+            src={sellerInfo?.perfilImg}
+            alt="foto de perfil"
+          />
+          <span className="text-grey-scale-grey-2">{sellerInfo?.name}</span>
+        </div>
+      </HeaderSeller>
       <div className="scroll-smooth bg-grey-scale-grey-8 font-inter">
         <div className="">
           {sellerInfo && (
@@ -66,7 +75,7 @@ export const SellerDashboard: React.FC = () => {
                 <div className="h-[50%]">
                   <img
                     src={sellerInfo.perfilImg}
-                    className="w-[104px] h-[104px] rounded-full object-contain"
+                    className="w-[104px] h-[104px] rounded-full object-cover"
                   />
                   <div className="flex gap-3 mt-3">
                     <h3 className="font-bold">{sellerInfo.name}</h3>
