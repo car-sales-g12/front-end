@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import jwt_decode from "jwt-decode";
 import { HeaderSeller } from "../../components/Header copy";
+import { Footer } from "../../components/Footer";
 
 interface SellerInfo {
   name: string;
@@ -144,6 +145,7 @@ export const SellerDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
