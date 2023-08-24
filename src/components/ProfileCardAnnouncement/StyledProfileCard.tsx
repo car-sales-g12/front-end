@@ -24,6 +24,7 @@ export const StyledProfileCard = styled.div`
     font-size: 18px;
     line-height: 150%;
     margin: 0px;
+    text-align: center;
   }
 
   .buttonProfile {

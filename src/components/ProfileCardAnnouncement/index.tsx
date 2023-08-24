@@ -1,16 +1,24 @@
 import { StyledProfileCard } from "./StyledProfileCard";
-import Photo from "../../assets/Photo.svg";
 
-export const ProfileCardAnnouncement = () => {
+interface profileProps{
+name:string | undefined,
+userDescription:string | undefined,
+urlImg:string | undefined
+}
+
+export const ProfileCardAnnouncement = ({
+  name,
+  userDescription,
+  urlImg
+}:profileProps) => {
   return (
     <StyledProfileCard>
-      <img src={Photo} alt="foto perfil" />
-      <h2>Samuel leao</h2>
+      <img src={urlImg} alt={name} />
+      <h2>{name}</h2>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's
+        {userDescription}
       </p>
-      <button className="buttonProfile">Ver todos os anuncions</button>
+      <button className="buttonProfile">Ver todos os anúncios</button>
     </StyledProfileCard>
   );
 };

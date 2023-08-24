@@ -3,6 +3,7 @@ import { Login } from "../pages/Login/index"
 import { Register } from "../pages/Register/index"
 import { HomePage } from "../pages/HomePage"
 
+
 export const RoutesMain = () => {
     return (
         <Routes>
