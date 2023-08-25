@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
-import CarFilter, { FilterOptions } from "../Filter";
-import { api } from "../../services/api";
-import {
-  BrandAndModelName,
-  CarCard,
-  CarDescription,
-  CarImage,
-  CarListContainer,
-  Container,
-  FilterContainer,
-  KmYearElement,
-  KmYearPriceContainer,
-  PriceElement,
-} from "./style";
+import React, { useState, useEffect } from 'react';
+import CarFilter, { FilterOptions } from '../Filter';
+import { api } from '../../services/api';
+import { BrandAndModelName, CarCard, CarDescription, CarImage, CarListContainer, Container, FilterContainer, KmYearElement, KmYearPriceContainer, PriceElement } from './style';
 
 interface Car {
   id: number;
@@ -21,17 +10,18 @@ interface Car {
   year: string;
   fuel: string;
   km: number;
+  active: boolean;
   color: string;
   good_deal: boolean;
   value: number;
   description: string;
   cover_img: string;
+  user: User;
 }
 
 const CarList: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
-
   useEffect(() => {
     api
       .get("/announcement/")
@@ -82,32 +72,21 @@ const CarList: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container className="container flex p-8 sm:p-0 flex-col sm:flex-row">
       <FilterContainer>
-        <CarFilter onApplyFilter={applyFilter} />
-      </FilterContainer>
+      <CarFilter onApplyFilter={applyFilter} />
+      </FilterContainer>  
       <CarListContainer>
         {filteredCars.map((car: Car) => (
-          <CarCard
-            key={car.id}
-            onClick={() => {
-              window.open(`/productdescription/${car.id}`, '_blank');
-            }}
-          >
-            <CarImage
-              src={car.cover_img}
-              alt={`${car.brand} ${car.model}`}
-              style={{ maxWidth: "100px" }}
-            />
-            <BrandAndModelName>
-              {car.brand} - {car.model}
-            </BrandAndModelName>
+          <CarCard key={car.id}>
+            <CarImage src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
+            <BrandAndModelName>{car.brand} - {car.model}</BrandAndModelName>
             <CarDescription>{car.description}</CarDescription>
             <p>Cor: {car.color} </p>
             <KmYearPriceContainer>
-              <KmYearElement>{car.km} km</KmYearElement>
-              <KmYearElement>{car.year}</KmYearElement>
-              <PriceElement>R${car.value}</PriceElement>
+            <KmYearElement>{car.km} km</KmYearElement>
+            <KmYearElement>{car.year}</KmYearElement>
+            <PriceElement>R${car.value}</PriceElement>
             </KmYearPriceContainer>
           </CarCard>
         ))}

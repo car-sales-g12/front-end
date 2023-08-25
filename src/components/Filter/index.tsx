@@ -194,8 +194,13 @@
 
 // export default CarFilter;
 
-import React, { useState } from 'react';
-import { FilterButton, OptionContainer, PriceKmDiv, RangeInputContainer } from './style';
+import React, { useState } from "react";
+import {
+  FilterButton,
+  OptionContainer,
+  PriceKmDiv,
+  RangeInputContainer,
+} from "./style";
 
 export interface FilterOptions {
   brand: string;
@@ -212,20 +217,37 @@ interface CarFilterProps {
 }
 
 const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
-  const brand = ['general Motors', 'Fiat', 'Ford', 'Honda', 'Porsche', 'Volswagen'];
-  const model = ['Civic', 'Corolla', 'Cruze', 'Fit', 'Gol', 'Ka', 'Onix', 'Porsche 718'];
-  const color = ['Blue', 'White', 'Gray', 'Silver', 'Black', 'Green'];
+  const brand = [
+    "general Motors",
+    "Fiat",
+    "Ford",
+    "Honda",
+    "Porsche",
+    "Volswagen",
+  ];
+  const model = [
+    "Civic",
+    "Corolla",
+    "Cruze",
+    "Fit",
+    "Gol",
+    "Ka",
+    "Onix",
+    "Porsche 718",
+  ];
+  const color = ["Blue", "White", "Gray", "Silver", "Black", "Green"];
   const year = [2022, 2021, 2018, 2015, 2013, 2012, 2010];
-  const fuel = ['Elétrico', 'Flex', 'Híbrido'];
+  const fuel = ["Elétrico", "Flex", "Híbrido"];
 
-  const [selectedMarca, setSelectedMarca] = useState<string>('');
-  const [selectedModelo, setSelectedModelo] = useState<string>('');
-  const [selectedCor, setSelectedCor] = useState<string>('');
-  const [selectedAno, setSelectedAno] = useState<string>('');
-  const [selectedCombustivel, setSelectedCombustivel] = useState<string>('');
+  const [selectedMarca, setSelectedMarca] = useState<string>("");
+  const [selectedModelo, setSelectedModelo] = useState<string>("");
+  const [selectedCor, setSelectedCor] = useState<string>("");
+  const [selectedAno, setSelectedAno] = useState<string>("");
+  const [selectedCombustivel, setSelectedCombustivel] = useState<string>("");
   const [selectedKm, setSelectedKm] = useState<[number, number]>([0, 700000]);
-  const [selectedPreco, setSelectedPreco] = useState<[number, number]>([0, 1000000000]);
-
+  const [selectedPreco, setSelectedPreco] = useState<[number, number]>([
+    0, 1000000000,
+  ]);
 
   const applyFilter = () => {
     const filters: FilterOptions = {
@@ -242,11 +264,11 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
   };
 
   const clearFilter = () => {
-    setSelectedMarca('');
-    setSelectedModelo('');
-    setSelectedCor('');
-    setSelectedAno('');
-    setSelectedCombustivel('');
+    setSelectedMarca("");
+    setSelectedModelo("");
+    setSelectedCor("");
+    setSelectedAno("");
+    setSelectedCombustivel("");
     setSelectedKm([0, 700000]);
     setSelectedPreco([0, 1000000000]);
 
@@ -258,11 +280,11 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
     }
 
     onApplyFilter({
-      brand: '',
-      model: '',
-      color: '',
-      year: '',
-      fuel: '',
+      brand: "",
+      model: "",
+      color: "",
+      year: "",
+      fuel: "",
       km: [0, 700000],
       value: [0, 1000000000],
     });
@@ -272,9 +294,9 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
     currentValue: string,
     setValue: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    setValue(currentValue === '' ? '' : currentValue);
+    setValue(currentValue === "" ? "" : currentValue);
     console.log(`Valor selecionado: ${currentValue}`);
-    applyFilter(); 
+    applyFilter();
   };
 
   return (
@@ -284,7 +306,7 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
         {brand.map((brands) => (
           <button
             key={brands}
-            className={selectedMarca === brands ? 'option selected' : 'option'}
+            className={selectedMarca === brands ? "option selected" : "option"}
             onClick={() => handleOptionClick(brands, setSelectedMarca)}
           >
             {brands}
@@ -296,7 +318,7 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
         {model.map((models) => (
           <button
             key={models}
-            className={selectedModelo === models ? 'option selected' : 'option'}
+            className={selectedModelo === models ? "option selected" : "option"}
             onClick={() => handleOptionClick(models, setSelectedModelo)}
           >
             {models}
@@ -310,8 +332,8 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
             key={colors}
             className={
               selectedCor.toLowerCase() === colors.toLowerCase()
-                ? 'option selected'
-                : 'option'
+                ? "option selected"
+                : "option"
             }
             onClick={() => handleOptionClick(colors, setSelectedCor)}
           >
@@ -322,19 +344,18 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
       <OptionContainer>
         <label>Ano</label>
         <button
-          className={selectedAno === '' ? 'option selected' : 'option'}
-          onClick={() => handleOptionClick('', setSelectedAno)}
-        >
-        </button>
+          className={selectedAno === "" ? "option selected" : "option"}
+          onClick={() => handleOptionClick("", setSelectedAno)}
+        ></button>
         {year.map((years) => (
           <button
             key={years}
             className={
-              selectedAno === years.toString() ? 'option selected' : 'option'
+              selectedAno === years.toString() ? "option selected" : "option"
             }
             onClick={() =>
               handleOptionClick(
-                selectedAno === years.toString() ? '' : years.toString(),
+                selectedAno === years.toString() ? "" : years.toString(),
                 setSelectedAno
               )
             }
@@ -350,8 +371,8 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
             key={fuels}
             className={
               selectedCombustivel.toLowerCase() === fuels.toLowerCase()
-                ? 'option selected'
-                : 'option'
+                ? "option selected"
+                : "option"
             }
             onClick={() => handleOptionClick(fuels, setSelectedCombustivel)}
           >
@@ -414,14 +435,16 @@ const CarFilter: React.FC<CarFilterProps> = ({ onApplyFilter }) => {
         </RangeInputContainer>
       </OptionContainer>
       {selectedMarca ||
-        selectedModelo ||
-        selectedCor ||
-        selectedAno ||
-        selectedCombustivel ||
-        (selectedKm[0] !== 0 || selectedKm[1] !== 700000) ||
-        (selectedPreco[0] !== 0 || selectedPreco[1] !== 1000000000) ? (
-          <FilterButton onClick={clearFilter}>Limpar Filtros</FilterButton>
-        ) : null}
+      selectedModelo ||
+      selectedCor ||
+      selectedAno ||
+      selectedCombustivel ||
+      selectedKm[0] !== 0 ||
+      selectedKm[1] !== 700000 ||
+      selectedPreco[0] !== 0 ||
+      selectedPreco[1] !== 1000000000 ? (
+        <FilterButton onClick={clearFilter}>Limpar Filtros</FilterButton>
+      ) : null}
     </div>
   );
 };
