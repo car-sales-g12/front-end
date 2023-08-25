@@ -4,7 +4,10 @@ import { ProfileCardAnnouncement } from "../../components/ProfileCardAnnouncemen
 import { CommentList } from "../../components/commentListAnnouncement";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-
+import { Footer } from "../../components/Footer";
+import { PostCommentAnnouncement } from "../../components/PostCommentAnnouncement";
+import { Header } from "../../components/Header";
+import jwtDecode from "jwt-decode";
 interface Car {
   id: number;
   brand: string;
@@ -27,23 +30,32 @@ interface Car {
     name: string;
     telephone: string;
     updatedAt: string;
-    perfilImg:string
+    perfilImg: string;
   };
 }
-interface Comments{
-    comment:string,
-    createdAt:string,
-    user:{
-        id:number,
-        name:string,
-        perfilImg:string
-    }
+interface Comments {
+  comment: string;
+  createdAt: string;
+  user: {
+    id: number;
+    name: string;
+    perfilImg: string;
+  };
+}
+interface user{
+  id: number;
+  name: string;
+  perfilImg: string;
 }
 
 export const ProductDescription = () => {
   const { announceid } = useParams();
   const [car, setCar] = useState<Car>();
+  const [loggedUser,setLoggedUser]=useState<user>()
   const [comments, setComments] = useState<Comments[]>([]);
+  const token=localStorage.getItem('Token') || {}
+  const userId=jwtDecode(token).id
+
 
   useEffect(() => {
     try {
@@ -53,25 +65,30 @@ export const ProductDescription = () => {
       });
       api.get(`comment/${announceid}`).then((response) => {
         const comments = response.data;
-        setComments(comments)
+        setComments(comments);
+      });
+      api.get(`/user/${userId}`).then((response) => {
+        const user = response.data;
+        setLoggedUser(user)
       });
     } catch (error) {
       console.error("Error fetching car data:", error);
     }
-  }, [comments,announceid]);
+  }, [comments,announceid,userId]);
 
-console.log(comments)
+
   return (
     <>
-      <div>
-        <ProfileCardAnnouncement
-          name={car?.user.name}
-          userDescription={car?.user.description}
-          urlImg={car?.user.perfilImg}
-        />
-        <DescriptionCar description={car?.description} />
-        <CommentList allComments={comments}/>
-      </div>
+    <Header/>
+      <ProfileCardAnnouncement
+        name={car?.user.name}
+        userDescription={car?.user.description}
+        urlImg={car?.user.perfilImg}
+      />
+      <DescriptionCar description={car?.description} />
+      <CommentList allComments={comments} />
+      <PostCommentAnnouncement name={loggedUser?.name} profileimg={loggedUser?.perfilImg}/>
+      <Footer />
     </>
   );
 };

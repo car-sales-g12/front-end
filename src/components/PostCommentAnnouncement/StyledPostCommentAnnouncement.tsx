@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-export const StyledPostComment = styled.div`
+export const StyledPostComment = styled.form`
   width: 751px;
   max-width: 100%;
   padding: 36px 44px;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   gap: 15px;
   .top_comment {
     position: relative;
@@ -46,7 +45,7 @@ export const StyledPostComment = styled.div`
     bottom: 20px;
     right:15px;
     border-radius: 4px;
-    background-color: var(--color-brand-1);
+    background-color:var(--color-brand-1);
     color:var(--color-white-fixed);
     border: none;
     padding: 12px 20px;
