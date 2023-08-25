@@ -3,11 +3,6 @@ import CarFilter, { FilterOptions } from "../Filter";
 import { api } from "../../services/api";
 import { CarListContainer, Container, FilterContainer } from "./style";
 
-interface SellerInfo {
-  name: string;
-  description: string;
-  perfilImg: string;
-}
 interface User {
   id: number;
   name: string;
@@ -86,7 +81,7 @@ const CarList: React.FC = () => {
       <FilterContainer>
         <CarFilter onApplyFilter={applyFilter} />
       </FilterContainer>
-      <CarListContainer className="mt-8 grid lg:grid-cols-2 gap-4 w-full xl:grid-cols-3">
+      <CarListContainer className="mt-8 grid lg:grid-cols-2 gap-4 gap-y-[30px] w-full xl:grid-cols-3">
         {filteredCars.map((filteredCars) => (
           <div key={filteredCars.id} className="w-[312px] h-[356px]">
             <div className="h-[40%] w-full relative">
