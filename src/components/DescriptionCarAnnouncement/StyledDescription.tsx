@@ -10,6 +10,9 @@ export const StyledDescriptionCar = styled.div`
   gap: 32px;
   height: max-content;
   border-radius: 4px;
+  background-color:var(--color-grey-10);
+  margin:0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   h2 {
     color: var(--color-grey-1);
     font-size: 20px;

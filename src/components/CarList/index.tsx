@@ -78,7 +78,8 @@ const CarList: React.FC = () => {
       </FilterContainer>  
       <CarListContainer>
         {filteredCars.map((car: Car) => (
-          <CarCard key={car.id}>
+          <CarCard onClick={() => {
+            window.open(`/productdescription/${car.id}`, '_blank')}} key={car.id}>
             <CarImage src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
             <BrandAndModelName>{car.brand} - {car.model}</BrandAndModelName>
             <CarDescription>{car.description}</CarDescription>

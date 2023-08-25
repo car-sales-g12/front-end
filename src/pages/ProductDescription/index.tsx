@@ -8,6 +8,9 @@ import { Footer } from "../../components/Footer";
 import { PostCommentAnnouncement } from "../../components/PostCommentAnnouncement";
 import { Header } from "../../components/Header";
 import jwtDecode from "jwt-decode";
+import {CarPicture } from "../../components/CarPictureAnnouncement";
+import { CarInfo } from "../../components/CarInfoAnnouncenment";
+import {StyledPage, CentralizedContainer } from "./style";
 interface Car {
   id: number;
   brand: string;
@@ -80,15 +83,26 @@ export const ProductDescription = () => {
   return (
     <>
     <Header/>
+    <StyledPage>
+      <CentralizedContainer>
+      <CarPicture carUrl={car?.cover_img}/>
+      <CarInfo model={car?.model} km={car?.km} year={car?.year} price={car?.value}/>
+      <DescriptionCar description={car?.description} />
       <ProfileCardAnnouncement
         name={car?.user.name}
         userDescription={car?.user.description}
         urlImg={car?.user.perfilImg}
       />
-      <DescriptionCar description={car?.description} />
+    
+
+
       <CommentList allComments={comments} />
       <PostCommentAnnouncement name={loggedUser?.name} profileimg={loggedUser?.perfilImg}/>
+      </CentralizedContainer>
       <Footer />
+    </StyledPage>
+ 
+    
     </>
   );
 };
