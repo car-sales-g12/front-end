@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CarFilter, { FilterOptions } from '../Filter';
 import { api } from '../../services/api';
 import { BrandAndModelName, CarCard, CarDescription, CarImage, CarListContainer, Container, FilterContainer, KmYearElement, KmYearPriceContainer, PriceElement } from './style';
+import { useNavigate } from 'react-router-dom';
 
 interface Car {
   id: number;
@@ -15,12 +16,17 @@ interface Car {
   value: number;
   description: string;
   cover_img: string;
+  active: boolean;
+  user: {
+    id: number;
+    name: string;
+  }
 }
 
 const CarList: React.FC = () => {
+  const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
-  
 
 
   useEffect(() => {
@@ -59,12 +65,16 @@ const CarList: React.FC = () => {
       <CarFilter onApplyFilter={applyFilter} />
       </FilterContainer>  
       <CarListContainer>
-        {filteredCars.map((car: Car) => (
+        {filteredCars.filter(car => car.active === true).map((car: Car) => (
           <CarCard key={car.id}>
             <CarImage src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
+            <span>{car.active.toString()}</span>
             <BrandAndModelName>{car.brand} - {car.model}</BrandAndModelName>
             <CarDescription>{car.description}</CarDescription>
-            <p>Cor: {car.color} </p>
+            <span onClick={() => navigate(`/seller-page/${car.user.id}`)} key={car.user.id}>
+            <h2>{car.user.name.split(' ').reduce((acc, word) => acc + word.charAt(0), '')}</h2>
+            <h2>{car.user.name}</h2>
+            </span>
             <KmYearPriceContainer>
             <KmYearElement>{car.km} km</KmYearElement>
             <KmYearElement>{car.year}</KmYearElement>
