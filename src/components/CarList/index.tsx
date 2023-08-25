@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CarFilter, { FilterOptions } from "../Filter";
 import { api } from "../../services/api";
 import { CarListContainer, Container, FilterContainer } from "./style";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   id: number;
@@ -27,6 +28,7 @@ interface Car {
 const CarList: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  const navigate = useNavigate()
   useEffect(() => {
     api
       .get("/announcement/")
@@ -101,7 +103,7 @@ const CarList: React.FC = () => {
               <p className="text-grey-scale-grey-3">
                 {filteredCars.description}
               </p>
-              <span className="flex gap-4 itens-center">
+              <span className="flex gap-4 itens-center" onClick={() => navigate(`/seller-page/${filteredCars.user.id}`)}>
                 <img
                   src={filteredCars.user.perfilImg}
                   className="w-[32px] h-[32px] rounded-full border"
