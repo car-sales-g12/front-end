@@ -89,7 +89,7 @@ const CarList: React.FC = () => {
       <CarListContainer className="mt-8 grid lg:grid-cols-2 gap-4 w-full xl:grid-cols-3">
         {filteredCars.map((filteredCars) => (
           <div key={filteredCars.id} className="w-[312px] h-[356px]">
-            <div className="h-[40%] w-full  relative">
+            <div className="h-[40%] w-full relative">
               <img
                 className="h-full object-cover w-full bg-grey-scale-grey-7"
                 src={filteredCars.cover_img}

@@ -56,8 +56,9 @@ export const FormLogin: React.FC<FormLoginProps> = ({ onLoginSuccess }) => {
       console.log("Formulário válido");
       const transformedData = transformEmptyToNull(formData);
       const response = await api.post("/login", transformedData);
-      const { token } = response.data;
+      const { token, user_id } = response.data;
       localStorage.setItem("Token", token);
+      localStorage.setItem("user_id", user_id);
 
       if (response.data) {
         const isSeller = response.data.is_seller;
