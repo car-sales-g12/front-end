@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import CarFilter, { FilterOptions } from '../Filter';
-import { api } from '../../services/api';
-import { BrandAndModelName, CarCard, CarDescription, CarImage, CarListContainer, Container, FilterContainer, KmYearElement, KmYearPriceContainer, PriceElement } from './style';
+import React, { useState, useEffect } from "react";
+import CarFilter, { FilterOptions } from "../Filter";
+import { api } from "../../services/api";
+import { CarListContainer, Container, FilterContainer } from "./style";
 
+interface User {
+  id: number;
+  name: string;
+  perfilImg: string;
+}
 interface Car {
   id: number;
   brand: string;
@@ -22,6 +27,7 @@ interface Car {
 const CarList: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  const navigate = useNavigate()
   useEffect(() => {
     api
       .get("/announcement/")
@@ -74,22 +80,50 @@ const CarList: React.FC = () => {
   return (
     <Container className="container flex p-8 sm:p-0 flex-col sm:flex-row">
       <FilterContainer>
-      <CarFilter onApplyFilter={applyFilter} />
-      </FilterContainer>  
-      <CarListContainer>
-        {filteredCars.map((car: Car) => (
-          <CarCard onClick={() => {
-            window.open(`/productdescription/${car.id}`, '_blank')}} key={car.id}>
-            <CarImage src={car.cover_img} alt={`${car.brand} ${car.model}`} style={{ maxWidth: '100px' }} />
-            <BrandAndModelName>{car.brand} - {car.model}</BrandAndModelName>
-            <CarDescription>{car.description}</CarDescription>
-            <p>Cor: {car.color} </p>
-            <KmYearPriceContainer>
-            <KmYearElement>{car.km} km</KmYearElement>
-            <KmYearElement>{car.year}</KmYearElement>
-            <PriceElement>R${car.value}</PriceElement>
-            </KmYearPriceContainer>
-          </CarCard>
+        <CarFilter onApplyFilter={applyFilter} />
+      </FilterContainer>
+      <CarListContainer className="mt-8 grid lg:grid-cols-2 gap-4 gap-y-[30px] w-full xl:grid-cols-3">
+        {filteredCars.map((filteredCars) => (
+          <div key={filteredCars.id} className="w-[312px] h-[356px]">
+            <div className="h-[40%] w-full relative">
+              <img
+                className="h-full object-cover w-full bg-grey-scale-grey-7"
+                src={filteredCars.cover_img}
+                alt="foto do carro"
+              ></img>
+              {filteredCars.good_deal && (
+                <span className="absolute top-0 right-0 bg-random-random-7 text-white p-1 rounded">
+                  $
+                </span>
+              )}
+            </div>
+            <div className="h-[60%] flex flex-col justify-around">
+              <h2 className="font-bold">{`${filteredCars.brand} - ${filteredCars.model}`}</h2>
+              <p className="text-grey-scale-grey-3">
+                {filteredCars.description}
+              </p>
+              <span className="flex gap-4 itens-center" onClick={() => navigate(`/seller-page/${filteredCars.user.id}`)}>
+                <img
+                  src={filteredCars.user.perfilImg}
+                  className="w-[32px] h-[32px] rounded-full border"
+                />
+                <span className="flex items-center">
+                  {filteredCars.user.name}
+                </span>
+              </span>
+              <div className="flex flex-row justify-between">
+                <div className="flex gap-4">
+                  <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
+                    {filteredCars.km} km
+                  </span>
+                  <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
+                    {filteredCars.year}
+                  </span>
+                </div>
+                <span className="font-bold">R$ {filteredCars.value}</span>
+              </div>
+            </div>
+          </div>
         ))}
       </CarListContainer>
     </Container>

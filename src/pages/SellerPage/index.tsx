@@ -58,7 +58,7 @@ export const SellerDashboard: React.FC = () => {
   }, [token]);
 
   return (
-    <>
+    <div>
       <HeaderSeller>
         <div className="flex gap-5 items-center">
           <img
@@ -80,7 +80,6 @@ export const SellerDashboard: React.FC = () => {
                       src={sellerInfo.perfilImg}
                       className="w-[104px] h-[104px] rounded-full object-cover"
                     />
-                    <span></span>
                   </div>
                   <div className="flex gap-3 mt-3">
                     <h3 className="font-bold">{sellerInfo.name}</h3>
@@ -103,58 +102,67 @@ export const SellerDashboard: React.FC = () => {
               </div>
             </div>
           )}
-
           <div className="mt-[15rem]">
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 container">
-              {announcements.map((announcement) => (
-                <li
-                  key={announcement.id}
-                  className="w-[312px] h-[356px] flex flex-col"
-                >
-                  <div className="h-[40%] w-full relative">
-                    <img
-                      className="h-full object-cover w-full bg-grey-scale-grey-7"
-                      src={announcement.cover_img}
-                      alt="foto do carro"
-                    />
-                    {announcement.active ? (
-                      <span className="absolute top-3 left-3 px-2 bg-brand-brand-1 text-white rounded">Ativo</span>
-                    ) : (
-                      <span className="absolute top-3 left-3 px-2 bg-grey-scale-grey-4 text-white rounded">Inativo</span>
-                    )}
-                  </div>
-                  <div className="h-[60%] flex flex-col justify-around">
-                    <h2 className="font-bold">{`${announcement.brand} - ${announcement.model}`}</h2>
-                    <p className="text-grey-scale-grey-3">
-                      {announcement.description}
-                    </p>
-                    <div className="flex flex-row justify-between">
-                      <div className="flex gap-4">
-                        <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
-                          {announcement.km} km
+              {announcements.length > 0 ? (
+                announcements.map((announcement) => (
+                  <li
+                    key={announcement.id}
+                    className="w-[312px] h-[356px] flex flex-col mb-4"
+                  >
+                    <div className="h-[40%] w-full relative">
+                      <img
+                        className="h-full object-cover w-full bg-grey-scale-grey-7"
+                        src={announcement.cover_img}
+                        alt="foto do carro"
+                      />
+                      {announcement.active ? (
+                        <span className="absolute top-3 left-3 px-2 bg-brand-brand-1 text-white rounded">
+                          Ativo
                         </span>
-                        <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
-                          {announcement.year}
+                      ) : (
+                        <span className="absolute top-3 left-3 px-2 bg-grey-scale-grey-4 text-white rounded">
+                          Inativo
+                        </span>
+                      )}
+                    </div>
+                    <div className="h-[60%] flex flex-col justify-around">
+                      <h2 className="font-bold">{`${announcement.brand} - ${announcement.model}`}</h2>
+                      <p className="text-grey-scale-grey-3">
+                        {announcement.description}
+                      </p>
+                      <div className="flex flex-row justify-between">
+                        <div className="flex gap-4">
+                          <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
+                            {announcement.km} km
+                          </span>
+                          <span className="bg-brand-brand-4 text-brand-brand-2 px-1 rounded font-medium">
+                            {announcement.year}
+                          </span>
+                        </div>
+                        <span className="font-bold">
+                          R$ {announcement.value}
                         </span>
                       </div>
-                      <span className="font-bold">R$ {announcement.value}</span>
+                      <span className="flex gap-4">
+                        <button className="px-2 border-2 border-black rounded text-sm">
+                          Editar
+                        </button>
+                        <button className="px-2 border-2 border-black rounded">
+                          Ver Detalhes
+                        </button>
+                      </span>
                     </div>
-                    <span className="flex gap-4">
-                      <button className="px-2 border-2 border-black rounded text-sm">
-                        Editar
-                      </button>
-                      <button className="px-2 border-2 border-black rounded">
-                        Ver Detalhes
-                      </button>
-                    </span>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))
+              ) : (
+                <span className="h-[500px]">você ainda não tem anúncios</span>
+              )}
             </ul>
           </div>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
