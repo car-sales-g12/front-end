@@ -1,5 +1,5 @@
-import { RoutesMain } from "./routes"
-import GlobalStyle from "./style/GlobalStyle"
+import { RoutesMain } from "./routes";
+import GlobalStyle from "./style/GlobalStyle";
 
 export const App = () => {
   return (
@@ -7,6 +7,5 @@ export const App = () => {
       <GlobalStyle />
       <RoutesMain />
     </>
-  )
-
-}
+  );
+};

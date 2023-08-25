@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   width: 100%;
   height: 5rem;
-  position: fixed;
   top: 0;
-  z-index: 1;
 
   display: flex;
   align-items: center;

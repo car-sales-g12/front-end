@@ -4,7 +4,6 @@ export const SytlesMainRegister = styled.main`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  background-color: var(--color-brand-4);
   padding: 0.7rem;
   font-family: "Inter", sans-serif;
   > section {
