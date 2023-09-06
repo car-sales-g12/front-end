@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import MotorShop from "../../assets/MotorShop.svg";
 import { HeaderContainer, Modal } from "./style";

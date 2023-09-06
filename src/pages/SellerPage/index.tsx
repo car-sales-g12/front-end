@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import jwt_decode from "jwt-decode";
 import { HeaderSeller } from "../../components/Header copy";
 import { Footer } from "../../components/Footer";
+import EditAdModal from "../../components/Modais/editAdModal";
+import Modal from "../../components/Modais/toastModal";
 
-interface SellerInfo {
+export interface SellerInfo {
   name: string;
   description: string;
   perfilImg: string;
+  id: number
 }
 
-interface Announcement {
+export interface Announcement {
   id: number;
   brand: string;
   model: string;
@@ -28,10 +30,12 @@ interface Announcement {
 }
 
 export const SellerDashboard: React.FC = () => {
-  const navigate = useNavigate();
   const [sellerInfo, setSellerInfo] = useState<SellerInfo | null>(null);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const token = localStorage.getItem("Token");
+  const [editAdModal, setEditAdModalModal] = useState(false)
+  const [createAdModal, setCreateAdModalModal] = useState(false)
+  const [idAnnouncement, setIdAnnouncement] = useState<number>()
 
   useEffect(() => {
     const fetchSellerData = async () => {
@@ -53,7 +57,6 @@ export const SellerDashboard: React.FC = () => {
         // Handle error
       }
     };
-    console.log(sellerInfo);
     fetchSellerData();
   }, [token]);
 
@@ -94,7 +97,10 @@ export const SellerDashboard: React.FC = () => {
                   </div>
                   <button
                     className="text-brand-brand-2 border-brand-brand-2 rounded border-[2px] px-3 py-2 w-fit"
-                    onClick={() => navigate("/create-listing")}
+                    onClick={() => {
+                      setCreateAdModalModal(true)
+                      setEditAdModalModal(true)
+                    }}
                   >
                     Criar Anúncio
                   </button>
@@ -145,7 +151,10 @@ export const SellerDashboard: React.FC = () => {
                         </span>
                       </div>
                       <span className="flex gap-4">
-                        <button className="px-2 border-2 border-black rounded text-sm">
+                        <button className="px-2 border-2 border-black rounded text-sm" onClick={() => {
+                          setIdAnnouncement(announcement.id)
+                          setEditAdModalModal(true)
+                        }}>
                           Editar
                         </button>
                         <button className="px-2 border-2 border-black rounded">
@@ -159,6 +168,15 @@ export const SellerDashboard: React.FC = () => {
                 <span className="h-[500px]">você ainda não tem anúncios</span>
               )}
             </ul>
+            <Modal />
+            <EditAdModal 
+                setEditAdModalModal={setEditAdModalModal} 
+                editAdModal={editAdModal} 
+                idAnnouncement={idAnnouncement} 
+                createAdModal={createAdModal} 
+                setCreateAdModalModal={setCreateAdModalModal} 
+                sellerInfo={sellerInfo}
+                announcements={announcements}/>
           </div>
         </div>
       </div>

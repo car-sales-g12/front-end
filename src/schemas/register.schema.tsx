@@ -8,7 +8,7 @@ export const formRegisterSchema = z.object({
     birth_date: z.string().max(20, "A data de nascimento pode ter no máximo 20 caracteres").nonempty("Data de nascimento é obrigatória"),
     description: z.string().nullable(),
     is_seller: z.boolean(),
-    password: z.string().nonempty("Senha é obrigatória").max(250, "A senha pode ter no máximo 250 caracteres"),
+    password: z.string().nonempty("Senha é obrigatória").max(250, "A senha pode ter no máximo 250 caracteres").min(5, "A senha tem que ter no minimo 5 caracteres"),
     confirmPassword: z.string().nonempty("É necessário confirmar a senha"),
 }).refine(({ password, confirmPassword }) => password === confirmPassword, {
     message: "As senhas não correspondem.",

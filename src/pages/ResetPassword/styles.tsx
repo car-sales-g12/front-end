@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-export const SytlesMainLogin = styled.main`
+export const SytlesMainResetPassword = styled.main`
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -68,26 +68,6 @@ export const SytlesMainLogin = styled.main`
                 margin-top: 2rem;
                 font-family: 'Inter', sans-serif;
             }
-            .button-recover-pass {
-                background-color: transparent;
-                border: none;
-                position: relative;
-                > h2 {
-                    color: var(--color-grey-2);
-                    font-size: 0.7rem;
-                    padding-right: 1rem;
-                    font-family: 'Inter', sans-serif;
-                    position: absolute;
-                    right: 0;
-                    top: -10px;
-                }
-            }
-        }
-        > h3 {
-            font-size: 0.7rem;
-            color: var(--color-grey-2);
-            text-align: center;
-            font-family: 'Inter', sans-serif;
         }
         > button {
             min-width: 100%;
@@ -102,9 +82,6 @@ export const SytlesMainLogin = styled.main`
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
         }
-        
     }
-@media (max-width: 450px) {
-        padding-top: 15rem;
 }
 `
