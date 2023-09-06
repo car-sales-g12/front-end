@@ -1,16 +1,41 @@
 import { StyledProfileCard } from "./StyledProfileCard";
-import Photo from "../../assets/Photo.svg";
+import { useNavigate } from "react-router-dom";
+interface profileProps{
+name:string | undefined,
+userDescription:string | undefined,
+urlImg:string | undefined
+isOwner:boolean,
+OwnerId:number | undefined
+}
 
-export const ProfileCardAnnouncement = () => {
+export const ProfileCardAnnouncement = ({
+  name,
+  userDescription,
+  urlImg,
+  isOwner,
+  OwnerId
+}:profileProps) => {
+const navigate=useNavigate()
+
+const handleNavigate = (isOwner:boolean)=>{
+  if(isOwner){
+    navigate(`/seller-dashboard`)
+    
+  }
+  else{
+    navigate(`/seller-page/${OwnerId}`)
+  }
+}
   return (
     <StyledProfileCard>
-      <img src={Photo} alt="foto perfil" />
-      <h2>Samuel leao</h2>
+      <img src={urlImg} alt={name} />
+      <h2>{name}</h2>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's
+        {userDescription}
       </p>
-      <button className="buttonProfile">Ver todos os anuncions</button>
+      <button className="buttonProfile" onClick={()=>{
+        handleNavigate(isOwner)
+      }}>Ver todos os anúncios</button>
     </StyledProfileCard>
   );
 };

@@ -3,15 +3,16 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   width: 100%;
   height: 5rem;
-  position: fixed;
   top: 0;
-  z-index: 10;
-
+  position:fixed;
+  z-index:10;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   background-color: var(--color-grey-10);
   border-bottom: 1px solid var(--color-grey-6);
+
   padding: 0 16px;
 
   .first-acess {
@@ -58,41 +59,37 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Modal = styled.div`
-  padding: 1rem 0.3rem;
+padding: 1.5rem 0.3rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+
+.button-login {
+  background-color: transparent;
+  border: none;
+  color: var(--color-grey-2);
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: fixed;
-  top: 56px;
-  width: 100%;
-  background-color: var(--color-white-fixed);
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+}
+.button-cadastro {
+  background-color: transparent;
+  border: 1px solid var(--color-grey-6);
+  color: var(--color-grey-0);
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+  padding: 0.6rem 0rem;
+  margin: 0 auto;
+}
 
-  .button-login {
-    background-color: transparent;
-    border: none;
-    color: var(--color-grey-2);
-    font-weight: 600;
-    font-family: "Inter", sans-serif;
-    display: flex;
-    align-items: center;
-    padding: 0.4rem 0.7rem;
-  }
-  .button-cadastro {
-    background-color: transparent;
-    border: 1px solid var(--color-grey-6);
-    color: var(--color-grey-0);
-    font-weight: 600;
-    font-family: "Inter", sans-serif;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-    padding: 0.6rem 0rem;
-    margin: 0 auto;
-  }
-
-  @media (min-width: 450px) {
+@media (min-width: 450px) {
     display: none;
-  }
-`;
+}
+`

@@ -8,6 +8,7 @@ import SellerPage from "../pages/SellerPagePublic"
 import { ModalProvider } from "../providers/ModaisContext/toastModalContext"
 
 
+import { ProductDescription } from "../pages/ProductDescription"
 
 export const RoutesMain = () => {
     return (
@@ -16,6 +17,7 @@ export const RoutesMain = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/seller-page/:userId" element={<SellerPage />} />
+            <Route path="/productdescription/:announceid" element={<ProductDescription/>}/>
                 <Route path="/seller-dashboard" element={<SellerDashboard />} />
                 <Route path="/resetPassword/:token" element={<ResetPassword />} />
                 <Route path="" element={<HomePage />} />
