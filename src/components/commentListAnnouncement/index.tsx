@@ -2,8 +2,10 @@ import { StyledCommentList } from "./StyledCommentList";
 import { CommentListCard } from "./commentListCard";
 
 interface Comment {
+  id:number,
   comment:string,
   createdAt:string,
+  updatedAt:string,
   user:{
       id:number,
       name:string,
@@ -25,7 +27,7 @@ export const CommentList = ({ allComments }: CommentListProps) => {
     <StyledCommentList>
       <h2 className="ul-title">Comentários</h2>
       {allComments.map((element,index) => (
-        <CommentListCard key={index} comment={element.comment} name={element.user.name} urlImg={element.user.perfilImg}/>
+        <CommentListCard commentUser={element.user.id} updatedAt={element.updatedAt} key={index} comment={element.comment} name={element.user.name} urlImg={element.user.perfilImg} idComment={element.id}/>
       ))}
     </StyledCommentList>
   );

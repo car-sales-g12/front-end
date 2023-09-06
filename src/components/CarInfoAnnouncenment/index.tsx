@@ -1,11 +1,19 @@
 import { StyledCarInfo } from "./StyledCarInfoAnnoucement";
-
 interface carProps{
     model:string | undefined,
-    km:string | undefined,year:string | undefined,price:string | undefined
+    km:number | undefined,year:string | undefined,price:number | undefined,
+    phone:string | undefined
 }
 
-export const CarInfo=({model,km,year,price}:carProps)=>{
+export const CarInfo=({model,km,year,price,phone}:carProps)=>{
+    const handleClick = () => {
+        if (phone) {
+          const whatsappUrl = `https://api.whatsapp.com/send?phone=+55${phone}&text=Ol%C3%A1%20vi%20seu%20anuncio%20e%20estou%20interessado`
+          ;
+          window.open(whatsappUrl, '_blank');
+        }
+      };
+
     return (
         <StyledCarInfo>
             <h2> {model} </h2>
@@ -18,7 +26,9 @@ export const CarInfo=({model,km,year,price}:carProps)=>{
             </div>
         
            
-            <button>comprar</button>
+            <button onClick={()=>{
+                handleClick()
+            }}>comprar</button>
         </StyledCarInfo>
     )
 }

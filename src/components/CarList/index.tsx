@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CarFilter, { FilterOptions } from "../Filter";
 import { api } from "../../services/api";
 import { CarListContainer, Container, FilterContainer } from "./style";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   id: number;
@@ -33,8 +34,10 @@ const CarList: React.FC = () => {
       .get("/announcement/")
       .then((response) => {
         const carData = response.data.data;
+    
         setCars(carData);
         setFilteredCars(carData);
+
       })
       .catch((error) => {
         console.error("Error fetching car data:", error);
@@ -84,7 +87,8 @@ const CarList: React.FC = () => {
       </FilterContainer>
       <CarListContainer className="mt-8 grid lg:grid-cols-2 gap-4 gap-y-[30px] w-full xl:grid-cols-3">
         {filteredCars.map((filteredCars) => (
-          <div key={filteredCars.id} className="w-[312px] h-[356px]">
+          <div onClick={() => {
+            window.open(`/productdescription/${filteredCars.id}`, '_blank')}} key={filteredCars.id} className="w-[312px] h-[356px]">
             <div className="h-[40%] w-full relative">
               <img
                 className="h-full object-cover w-full bg-grey-scale-grey-7"

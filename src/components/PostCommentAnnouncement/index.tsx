@@ -16,11 +16,12 @@ import { api } from "../../services/api";
 import { useParams } from "react-router-dom";
 
 export const PostCommentAnnouncement = ({name,profileimg}:incomingProps) => {
-  const token=localStorage.getItem('Token') || {}
-  const userId=jwtDecode(token).id
+  const token=localStorage.getItem('Token')
+  const userId= jwtDecode(token).id
   const [comment, setComment] = useState('');
   const { announceid } = useParams();
   const { register, handleSubmit } = useForm<IFormInput>()
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
    
     api.post(`/comment/${userId}/${announceid}`, JSON.stringify(data), {
