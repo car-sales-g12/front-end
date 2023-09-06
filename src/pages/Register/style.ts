@@ -4,8 +4,10 @@ export const SytlesMainRegister = styled.main`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  background-color: var(--color-brand-4);
   padding: 0.7rem;
   font-family: "Inter", sans-serif;
+
   > section {
     display: flex;
     flex-direction: column;
@@ -23,6 +25,7 @@ export const SytlesMainRegister = styled.main`
       display: flex;
       flex-direction: column;
       font-family: "Inter", sans-serif;
+      gap: 6px;
 
       > div {
         min-width: 100%;
@@ -31,8 +34,7 @@ export const SytlesMainRegister = styled.main`
           display: flex;
           flex-direction: column;
           font-size: 0.7rem;
-          font-weight: 500;
-          gap: 6px;
+          font-weight: 600;
           color: var(--color-grey-1);
           font-family: "Inter", sans-serif;
 
@@ -58,7 +60,7 @@ export const SytlesMainRegister = styled.main`
       > h3 {
         font-family: "Inter", sans-serif;
         font-size: 0.8rem;
-        margin-bottom: 1.5rem;
+        margin: 1rem 0rem;
       }
       > button {
         min-width: 100%;
@@ -83,19 +85,26 @@ export const SytlesMainRegister = styled.main`
       font-family: "Inter", sans-serif;
     }
   }
+  @media (min-width: 450px) {
+    padding-top: 3rem;
+}
 `;
 
 export const FormAdress = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   div {
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
   label {
     display: flex;
     flex-direction: column;
     font-size: 0.7rem;
     font-weight: 500;
-    gap: 6px;
+
     color: var(--color-grey-1);
     font-family: "Inter", sans-serif;
   }
@@ -113,17 +122,24 @@ export const FormAdress = styled.div`
   }
 `;
 
-export const StyledButton = styled.button<{ active: boolean }>`
-    min-width: 47%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 4px;
-    padding: 0.8rem;
-    font-size: 1rem;
-    font-family: "Inter", sans-serif;
-    border: ${(props) => (props.active ? "none" : "1px solid var(--color-grey-4)")};
-    background-color: ${(props) => (props.active ? "var(--color-brand-1)" : "var(--color-white-fixed)")};
-    color: ${(props) => (props.active ? "var(--color-white-fixed)" : "var(--color-grey-0)")};    
-    font-weight: 700;
-`
+export const StyledButton = styled.button<{ active: string }>`
+  min-width: 47%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 4px;
+  padding: 0.7rem;
+  font-size: 0.7rem;
+  font-family: "Inter", sans-serif;
+  border: ${(props) =>
+    props.active == "true" ? "none" : "1px solid var(--color-grey-4)"};
+  background-color: ${(props) =>
+    props.active == "true"
+      ? "var(--color-brand-1)"
+      : "var(--color-white-fixed)"};
+  color: ${(props) =>
+    props.active == "true"
+      ? "var(--color-white-fixed)"
+      : "var(--color-grey-0)"};
+  font-weight: 600;
+`;

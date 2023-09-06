@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import CarList from "../../components/CarList";
 import { Footer } from "../../components/Footer";
@@ -18,7 +19,7 @@ export const HomePage = () => {
         console.log(response);
       };
       getUser();
-    } catch (error) {}
+    } catch (error) { console.log(error)}
   }, []);
 
   return (

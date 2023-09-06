@@ -2,6 +2,7 @@ import { RoutesMain } from "./routes";
 <<<<<<< HEAD
 import GlobalStyle from "./style/GlobalStyle";
 
+
 export const App = () => {
   return (
     <>
